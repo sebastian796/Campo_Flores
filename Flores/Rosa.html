@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      :root {
+        --color-tallo-hojas: rgb(32, 90, 32);
+        --sombra-hoja: rgb(72, 139, 55);
+        --refrejo-petalo: #c75959;
+        --color-petalo: #e73b52;
+        --color-fondo: #10223a;
+      }
+      html {
+        overflow: hidden;
+        font-size: 62.5%;
+      }
+      body {
+        background-color: var(--color-fondo);
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .centrar {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .tallo {
+        background-color: var(--color-tallo-hojas);
+        width: 8px;
+        height: 150px;
+        border-radius: 10px;
+        bottom: 0px;
+        z-index: 1;
+      }
+      .hoja {
+        background-color: var(--color-tallo-hojas);
+        width: 30px;
+        height: 60px;
+        z-index: 2;
+        position: absolute;
+      }
+      .hoja:nth-child(1) {
+        border-top-right-radius: 20px;
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 2px;
+        transform: rotate(-20deg);
+        top: 15px;
+        left: -33px;
+        border-left: 3px solid var(--sombra-hoja);
+        border-top: 3px solid var(--sombra-hoja);
+      }
+      .hoja:nth-child(2) {
+        border-top-right-radius: 7px;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 25px;
+        transform: rotate(20deg);
+        top: 40px;
+        right: -34px;
+        border-right: 3px solid var(--sombra-hoja);
+        border-top: 3px solid var(--sombra-hoja);
+      }
+      .container-rosa {
+        width: 300px;
+        height: 400px;
+        position: relative;
+      }
+      .container-petalos {
+        width: 200px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: end;
+        top: 14%;
+        z-index: 5;
+      }
+      .petalo {
+        background-color: var(--color-petalo);
+        width: 40px;
+        height: 65px;
+        position: absolute;
+        transition-duration: 3s;
+      }
+      .petalo-derecha {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 30px;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 5px;
+        border-left: 3px solid var(--refrejo-petalo);
+        border-top: 3px solid var(--refrejo-petalo);
+        transform-origin: bottom right;
+        left: 28%;
+      }
+      .petalo-izquierda {
+        border-top-left-radius: 30px;
+        border-top-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 30px;
+        border-top: 4px solid var(--refrejo-petalo);
+        border-right: 4px solid var(--refrejo-petalo);
+        transform-origin: bottom left;
+        right: 28%;
+      }
+      .petalo-centro {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 15px;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+        border-top: 4px solid var(--refrejo-petalo);
+        border-left: 4px solid var(--refrejo-petalo);
+        border-right: 4px solid var(--refrejo-petalo);
+        bottom: 5px;
+        z-index: -1;
+      }
+      .puas {
+        border-top: 10px solid transparent;
+        border-left: 10px solid var(--color-tallo-hojas);
+        border-radius: 3px;
+      }
+      .puas:nth-child(3) {
+        margin-left: 2px;
+        transform: rotate(-140deg);
+        margin-top: 15px;
+      }
+      .puas:nth-child(4) {
+        margin-left: -3px;
+        transform: rotate(50deg);
+      }
+      .puas:nth-child(5) {
+        margin-left: 2px;
+        transform: rotate(-140deg);
+        margin-top: 5px;
+      }
+      .puas:nth-child(6) {
+        margin-top: 35px;
+        margin-left: -5px;
+        transform: rotate(50deg);
+      }
+      .puas:nth-child(7) {
+        transform: rotate(50deg);
+        margin-top: 20px;
+        margin-left: -3px;
+      }
+      .petalo-arriba {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 30px;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 5px;
+        border-left: 3px solid var(--refrejo-petalo);
+        border-top: 3px solid var(--refrejo-petalo);
+        position: absolute;
+        top: 47%;
+        left: 35%;
+        z-index: 11;
+        transform-origin: bottom right;
+      }
+      .petalo-caida {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 30px;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 5px;
+        border-left: 3px solid var(--refrejo-petalo);
+        border-top: 3px solid var(--refrejo-petalo);
+        position: absolute;
+        top: 88%;
+        left: 25%;
+        z-index: 11;
+        animation: animar-petalo 3s ease-in-out;
+        transition-duration: 1s;
+        animation-iteration-count: 1;
+      }
+
+      /* top: 47  left: 35%  */
+      @keyframes animar-petalo {
+        0% {
+          top: 47%;
+          left: 35%;
+          transform: rotate(-32deg);
+          box-shadow: 2px -3px 10px #fff;
+        }
+        50% {
+          box-shadow: 2px -3px 10px #fff;
+        }
+        100% {
+          top: 88%;
+          left: 25%;
+          transform: rotate(-75deg);
+          box-shadow: none;
+        }
+      }
+      /* Cupula de Vidrio para Proteger la Rosa de toda Amenaza */
+      .cupula {
+        width: 210px;
+        height: 310px;
+        background-color: white;
+        opacity: 0.15;
+        position: absolute;
+        z-index: 20;
+        border-top-left-radius: 100px;
+        border-top-right-radius: 100px;
+        top: 250px;
+        animation: animation-cupula 4s ease;
+      }
+      @keyframes animation-cupula {
+        0% {
+          top: -500px;
+        }
+        100% {
+          top: 250px;
+        }
+      }
+
+      .mensaje {
+        position: absolute;
+        color: transparent;
+      }
+      .palabras {
+        position: absolute;
+        color: white;
+        top: 190px;
+        width: 200px;
+        text-align: center;
+        font-size: 20px;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-style: italic;
+        animation: animar-palabras 7s ease-in;
+        text-shadow: 1px 1px 4px white;
+      }
+      @keyframes animar-palabras {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      /* Etiqueta escondida de la rosa */
+      .etiqueta {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.05;
+        border-top: 150px solid white;
+        border-right: 150px solid transparent;
+      }
+      .conocidos {
+        position: absolute;
+      }
+      .desconocidos {
+        position: absolute;
+        top: -145px;
+        left: 10px;
+        width: 40px;
+        font-size: 15px;
+        font-weight: 900;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+        opacity: 1;
+        animation: animation-letras 2s ease;
+      }
+      @keyframes animation-letras {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @media screen and (max-width: 500px) {
+        .cupula {
+          top: 300px;
+        }
+        @keyframes animation-cupula {
+          0% {
+            top: -500px;
+          }
+          100% {
+            top: 300px;
+          }
+        }
+        .palabras {
+          top: 200px;
+        }
+      }
+
+      /* Content para regresar a la anterior pagina */
+      .content-regresar {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+      }
+      .regresar {
+        color: #fff;
+        font-size: 1.5rem;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+      .regresar:hover {
+        transition-duration: 1s;
+        color: rgb(178, 179, 253);
+        transform: scale(0.9);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content-regresar">
+      <a href="../Campo de Flores/index.html" class="regresar">Regresar</a>
+    </div>
+    <div class="container-rosa">
+      <div class="container-petalos centrar">
+        <div class="petalo petalo-derecha"></div>
+        <div class="petalo petalo-derecha"></div>
+        <div class="petalo petalo-izquierda"></div>
+        <div class="petalo petalo-izquierda"></div>
+        <div class="petalo petalo-izquierda"></div>
+        <div class="petalo petalo-centro"></div>
+      </div>
+      <div class="centrar tallo">
+        <div class="hoja one"></div>
+        <div class="hoja two"></div>
+        <div class="puas"></div>
+        <div class="puas"></div>
+        <div class="puas"></div>
+        <div class="puas"></div>
+        <div class="puas"></div>
+      </div>
+      <div class="petalo petalo-arriba"></div>
+    </div>
+    <div class="vidrio"></div>
+    <div class="mensaje">"Para la Rosa más Hermosa de mi Vida"</div>
+    <div class="etiqueta">
+      <p class="conocidos">Recuerda: Estare Siempre Para Ti</p>
+    </div>
+  </body>
+  <script>
+    document
+      .querySelector(".container-rosa")
+      .addEventListener("mouseover", () => {
+        const petalosIzquierda = document.querySelectorAll(".petalo-izquierda");
+        const petalosDerecha = document.querySelectorAll(".petalo-derecha");
+        const petaloCentro = document.querySelector(".petalo-centro");
+        const cupula = document.querySelector(".vidrio");
+        const palabras = document.querySelector(".mensaje");
+        // Para la rosa mas hermosa que han visto mis ojos en mi vida
+        let grados = 32,
+          index = 12;
+        let petaloArriba = document.querySelector(".petalo-arriba");
+        petaloArriba.style.transform = `rotate(-${grados}deg)`;
+        petaloArriba.style.boxShadow = `2px -3px 10px #fff`;
+        grados -= 10;
+        for (const petalo of petalosDerecha) {
+          petalo.style.transform = `rotate(-${grados}deg)`;
+          petalo.style.boxShadow = "2px -3px 10px #fff";
+          petalo.style.zIndex = `${index}`;
+          index--;
+          grados -= 15;
+        }
+        grados = 27;
+        for (const petalo of petalosIzquierda) {
+          petalo.style.transform = `rotate(${grados}deg)`;
+          petalo.style.boxShadow = `-3px -2px 10px #fff`;
+          petalo.style.zIndex = `${index}`;
+          grados -= 12;
+          index--;
+        }
+        petaloCentro.style.boxShadow = "0px -2px 15px 5px #fff";
+        cupula.classList.remove("vidrio");
+        cupula.classList.add("cupula");
+        palabras.classList.remove("mensaje");
+        palabras.classList.add("palabras");
+      });
+    document.querySelector(".etiqueta").addEventListener("click", () => {
+      const desconocidos = document.querySelector(".conocidos");
+      desconocidos.classList.remove("conocidos");
+      desconocidos.classList.add("desconocidos");
+
+      const petaloCaida = document.querySelector(".petalo-arriba");
+      petaloCaida.classList.remove("petalo-arriba");
+      petaloCaida.classList.add("petalo-caida");
+      petaloCaida.style.transform = `rotate(-75deg)`;
+      petaloCaida.style.boxShadow = `none`;
+    });
+  </script>
+</html>

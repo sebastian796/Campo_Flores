@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html {
+        font-size: 62.5%;
+      }
+      body {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        background-color:burlywood
+        
+      }
+      .izquierdo {
+        position: absolute;
+        width: 80px;
+        height: 150px;
+        background: linear-gradient(60deg,#c93d3d,#db6969 30%,#c93d3d );
+        border-top-right-radius: 100%;
+        border-bottom-left-radius: 80%;
+        left: 34%;
+        z-index: 2;
+        box-shadow:2px -2px 10px white;
+        border:1px solid rgb(248, 104, 104);
+      }
+      .derecho {
+        position: absolute;
+        width: 80px;
+        height: 150px;
+        background: linear-gradient(-60deg,#c93d3d,#db6969 30%,#c93d3d);
+        border-top-left-radius: 100%;
+        border-bottom-right-radius: 80%;
+        right: 34%;
+        z-index: 3;
+        box-shadow:-2px -2px 10px white;
+        border:1px solid rgb(248, 104, 104);
+
+      }
+
+      .central {
+        position: absolute;
+        width: 100px;
+        height: 150px;
+        background: linear-gradient(120deg, brown,rgb(236, 81, 81) 50%,brown);
+        border-top-left-radius: 100%;
+        border-bottom-right-radius: 100%;
+        transform: rotate(-35deg);
+        bottom: 40%;
+        border:1px solid rgb(248, 104, 104);
+
+      }
+      .tallo {
+        width: 10px;
+        height: 250px;
+        background-color: green;
+        position: absolute;
+        bottom: 0px;
+      }
+      .hoja {
+        position: absolute;
+        bottom: 0px;
+        left: 45%;
+        width: 20px;
+        height: 200px;
+        background-color: green;
+        border-top-right-radius: 100%;
+        border-top-left-radius: 10%;
+        border-bottom-left-radius: 100%;
+        transform: rotate(-5deg);
+      }
+      .hoja:nth-child(6) {
+        position: absolute;
+        bottom: 0px;
+        left: 52%;
+        width: 20px;
+        height: 200px;
+        background-color: green;
+        border-top-left-radius: 100%;
+        border-bottom-right-radius: 100%;
+        transform: rotate(8deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="petalo izquierdo"></div>
+    <div class="petalo derecho"></div>
+    <div class="petalo central"></div>
+    <div class="tallo"></div>
+    <div class="hoja"></div>
+    <div class="hoja"></div>
+  </body>
+</html>
